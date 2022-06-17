@@ -16,18 +16,20 @@ d3.json(samples).then(function(data) {
     dropDown.on("change", optionChanged);
   });
 
-//update with dropdown selection -- this doesnt work yet!!
+//update with dropdown selection 
 function optionChanged(sample_id) {
     console.log(sample_id);
-    let samples = data.samples;
-    let meta_info = data.metadata;
-    for (let i = 0; i < samples.length; i++) {
-        if (sample.id === sample_id) {
-            bar(samples[i]);
-            bubble(samples[i])
-            metadata(meta_info[i])
+    d3.json(samples).then(function(data) {
+        let samples = data.samples;
+        let meta_info = data.metadata;
+        for (let i = 0; i < samples.length; i++) {
+            if (samples[i].id === sample_id) {
+                bar(samples[i]);
+                bubble(samples[i])
+                metadata(meta_info[i])
+            };
         };
-    };
+    })
 };
 
 function bar(sample) {
